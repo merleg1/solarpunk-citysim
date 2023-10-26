@@ -72,36 +72,38 @@ public class TaskManager : MonoBehaviour
     {
         float currentTime = TimeManager.Instance.GetCurrentTimeinHours();
         List<ITask> newTasks = new List<ITask>();
-        //newTasks.Add(new GoHomeTask(character));
-        //newTasks.Add(new WaitTask(0.5f));
 
-        if (currentTime >= 8.0f && currentTime <= 10.0f)
-        {
-            Debug.Log("work");
-            newTasks.Add(new GoToWorkTask(character));
-            newTasks.Add(new WaitTask(Random.Range(character.minWorkDuration, character.maxWorkDuration)));
-        }
 
-        else if (currentTime >= 12.0f && currentTime <= 13.0f)
-        {
-            Debug.Log("eat");
-            newTasks.Add(new GoEatTask(character));
-            newTasks.Add(new WaitTask(character.eatDuration));
-        }
-
-        else if (currentTime >= character.sleepTime - character.sleepTimeTolerance && currentTime < character.sleepTime + character.sleepTimeTolerance)
+        if (currentTime >= character.sleepTime - character.sleepTimeTolerance && currentTime < character.sleepTime + character.sleepTimeTolerance)
         {
             Debug.Log("sleep");
             newTasks.Add(new GoHomeTask(character));
             newTasks.Add(new WaitTask(Random.Range(character.minSleepDuration, character.maxSleepDuration)));
         }
-
-        ////hobby
-
+        else if (currentTime >= 12.0f && currentTime <= 14.0f)
+        {
+            Debug.Log("eat");
+            newTasks.Add(new GoEatTask(character));
+            newTasks.Add(new WaitTask(character.eatDuration));
+        }
+        else if (!character.wentToHobbyToday && character.wentToWorkToday)
+        {
+            Debug.Log("hobby");
+            newTasks.Add(new GoToHobbyTask(character));
+            newTasks.Add(new WaitTask(character.hobbyDuration));
+            character.wentToHobbyToday = true;
+        }
+        else if (character.remainingWorkHoursToday > 0)
+        {
+            Debug.Log("work");
+            newTasks.Add(new GoToWorkTask(character));
+            newTasks.Add(new WaitTask(character.remainingWorkHoursToday / 2));
+            character.remainingWorkHoursToday -= character.remainingWorkHoursToday / 2;
+            character.wentToWorkToday = true;
+        }
         else
         {
-            newTasks.Add(new GoHomeTask(character));
-            newTasks.Add(new WaitTask(1f));
+            newTasks.Add(new ExploreTask(character.GetNavMeshAgent(), PlaceManager.Instance.GetHomeForCharacter(character).transform.position, 50f, 1f));
         }
         return newTasks;
     }

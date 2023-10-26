@@ -11,22 +11,23 @@ public  class MoveToPosTask : ITask
 
     private Vector3 _targetPos;
     private NavMeshAgent _navMeshAgent;
+    private float _targetTolerance;
 
-    public MoveToPosTask(Vector3 targetPos, NavMeshAgent navMeshAgent)
+    public MoveToPosTask(Vector3 targetPos, NavMeshAgent navMeshAgent, float targetTolerance = 0f)
     {
         _targetPos = targetPos;
         _navMeshAgent = navMeshAgent;
+        _targetTolerance = targetTolerance;
     }
     public void ExecuteStart()
     {
         IsDone = false;
-
         _navMeshAgent.SetDestination(_targetPos);
     }
 
     public void ExecuteUpdate()
     {
-        if (!_navMeshAgent.pathPending && _navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance)
+        if (!_navMeshAgent.pathPending && _navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance + _targetTolerance)
         {
             IsDone = true;
         }

@@ -177,6 +177,6 @@ MonoBehaviour:
   sleepTimeTolerance: 0.25
   minSleepDuration: 7.5
   maxSleepDuration: 8
-  hobbyDuration: 0
+  hobbyDuration: 4
   eatDuration: 1
   taskName: 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GoHomeTask : MoveToPosTask
 {
-    public GoHomeTask(Character character) : base(GetHomePosition(character), character.GetNavMeshAgent())
+    public GoHomeTask(Character character) : base(GetHomePosition(character), character.GetNavMeshAgent(), 5f)
     {
     }
 
