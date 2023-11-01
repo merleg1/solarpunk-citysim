@@ -5,7 +5,7 @@ using Random = UnityEngine.Random;
 public class ExploreTask : ITask
 {
     public string Name => "Explore";
-    public TaskPriority Priority => TaskPriority.Low;
+    public TaskPriority Priority { get; }
     public bool IsDone { get; set; }
 
     private NavMeshAgent _navMeshAgent;
@@ -15,25 +15,27 @@ public class ExploreTask : ITask
 
     private float _exploreStartTime;
 
-    public ExploreTask(NavMeshAgent agent, Vector3 center, float radius, float duration)
+    public ExploreTask(NavMeshAgent agent, Vector3 center, float radius, float duration, TaskPriority taskPriority = TaskPriority.Low)
     {
         _navMeshAgent = agent;
         _exploreCenter = center;
         _exploreRadius = radius;
         _exploreDuration = duration;
+        Priority = taskPriority;
     }
 
     public void ExecuteStart()
     {
         IsDone = false;
-        _exploreStartTime = TimeManager.Instance.GetCurrentTimeinHours();
+        _exploreStartTime = TimeManager.Instance.GetTimeSinceStartInHours();
         SetRandomDestination();
     }
 
     public void ExecuteUpdate()
     {
-        if (TimeManager.Instance.GetCurrentTimeinHours() - _exploreStartTime >= _exploreDuration)
+        if (TimeManager.Instance.GetTimeSinceStartInHours() - _exploreStartTime >= _exploreDuration)
         {
+            _navMeshAgent.ResetPath();
             IsDone = true;
         }
         else if (!_navMeshAgent.pathPending && _navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance)

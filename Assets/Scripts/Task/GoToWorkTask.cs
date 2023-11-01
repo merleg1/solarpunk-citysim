@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class GoToWorkTask : MoveToPosTask
 {
-    public GoToWorkTask(Character character) : base(GetWorkPosition(character), character.GetNavMeshAgent(), 10f)
+    public GoToWorkTask(Character character, TaskPriority taskPriority = TaskPriority.Medium) : base(GetWorkPosition(character), character.GetNavMeshAgent(), 0f, taskPriority)
     {
     }
 

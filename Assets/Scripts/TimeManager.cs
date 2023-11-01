@@ -10,11 +10,18 @@ public class TimeManager : MonoBehaviour
     public float timeScale = 1.0f; // Adjust the speed of in-game time.
     public DateTime CurrentTime { get; private set; }
 
+    private DateTime _startTime;
+
     private float _elapsedGameSeconds;
 
-    public float GetCurrentTimeinHours()
+    public float GetCurrentDayHours()
     {
         return CurrentTime.Hour + CurrentTime.Minute / 60f;
+    }
+
+    public float GetTimeSinceStartInHours()
+    {
+        return (float)(CurrentTime - _startTime).TotalHours;
     }
 
     private void Awake()
@@ -27,7 +34,9 @@ public class TimeManager : MonoBehaviour
 
     private void Start()
     {
-        CurrentTime = DateTime.Now;
+        _startTime = DateTime.Today.AddHours(9);
+
+        CurrentTime = _startTime;
         _elapsedGameSeconds = 0f;
     }
 
@@ -36,9 +45,9 @@ public class TimeManager : MonoBehaviour
         float realTimeSeconds = Time.deltaTime;
         _elapsedGameSeconds += realTimeSeconds * timeScale;
 
-        if (_elapsedGameSeconds >= 60)
+        while (_elapsedGameSeconds >= 60)
         {
-            _elapsedGameSeconds = 0;
+            _elapsedGameSeconds -= 60;
             CurrentTime = CurrentTime.AddMinutes(1);
         }
     }

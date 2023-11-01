@@ -1,18 +1,22 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class WaitTask : ITask
+public class WaitAtCurrentDestinationTask : ITask
 {
-    public string Name => "WaitTask";
+    public string Name => "WaitAtCurrentDestinationTask";
     public TaskPriority Priority { get; }
     public bool IsDone { get; set; }
 
+    private NavMeshAgent _navMeshAgent;
     private float _waitTime;
     private float _startTime;
 
-    public WaitTask(float waitTime, TaskPriority taskPriority = TaskPriority.Medium)
+    public WaitAtCurrentDestinationTask(Character character, float waitTime, TaskPriority taskPriority = TaskPriority.Medium)
     {
+        _navMeshAgent = character.GetNavMeshAgent();
         _waitTime = waitTime;
         Priority = taskPriority;
     }
@@ -20,6 +24,7 @@ public class WaitTask : ITask
     public void ExecuteStart()
     {
         IsDone = false;
+        _navMeshAgent.SetDestination(_navMeshAgent.transform.position);
         _startTime = TimeManager.Instance.GetTimeSinceStartInHours();
     }
 
@@ -27,6 +32,7 @@ public class WaitTask : ITask
     {
         if (TimeManager.Instance.GetTimeSinceStartInHours() - _startTime >= _waitTime)
         {
+            _navMeshAgent.ResetPath();
             IsDone = true;
         }
     }

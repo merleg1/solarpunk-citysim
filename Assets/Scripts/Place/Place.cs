@@ -9,7 +9,8 @@ public class Place : MonoBehaviour
         Eat,
         Hobby,
         Home,
-        Work
+        Work,
+        Festival
     }
 
     public PlaceType placeType;

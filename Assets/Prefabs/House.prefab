@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 8614324268941726392}
   - component: {fileID: 25548211009355726}
   - component: {fileID: 9192927415436218911}
-  - component: {fileID: 694103151320765207}
   - component: {fileID: 1272153969047329713}
+  - component: {fileID: -6360102342767218158}
   m_Layer: 0
   m_Name: House
   m_TagString: Untagged
@@ -107,22 +107,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!208 &694103151320765207
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5103975618348191742}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!114 &1272153969047329713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,3 +124,19 @@ MonoBehaviour:
   placeDescription: 
   characters: []
   maxCharacters: 3
+--- !u!208 &-6360102342767218158
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5103975618348191742}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
