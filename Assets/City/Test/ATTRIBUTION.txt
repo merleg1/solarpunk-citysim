@@ -1,0 +1,8 @@
+The following datasets were used to create the file:
+
+buildings (swisstopo OGD, Bundesamt für Landestopografie swisstopo) - https://www.swisstopo.admin.ch/de/home.html
+https://www.swisstopo.admin.ch/de/home/meta/konditionen/geodaten/ogd.html
+
+terrain (swisstopo OGD, Bundesamt für Landestopografie swisstopo) - https://www.swisstopo.admin.ch/de/home.html
+https://www.swisstopo.admin.ch/de/home/meta/konditionen/geodaten/ogd.html
+
