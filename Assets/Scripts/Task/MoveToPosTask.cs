@@ -24,6 +24,7 @@ public  class MoveToPosTask : ITask
     {
         IsDone = false;
         _navMeshAgent.SetDestination(_targetPos);
+        Debug.Log(_targetPos);
     }
 
     public void ExecuteUpdate()

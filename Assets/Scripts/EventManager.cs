@@ -22,7 +22,7 @@ public class EventManager : MonoBehaviour
 
     private void Start()
     {
-        _lastFestivalTime = TimeManager.Instance.GetTimeSinceStartInHours()-23f;
+        _lastFestivalTime = TimeManager.Instance.GetTimeSinceStartInHours();
     }
 
     private void Update()
