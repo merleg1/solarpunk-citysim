@@ -40,7 +40,30 @@ public class PlaceManager : MonoBehaviour
                 }
             }
         }
-        return AddCharacterToHome(character);
+        return AddCharacterToRandomHome(character);
+    }
+
+    public Home AddCharacterToRandomHome(Character character)
+    {
+        List<Home> homes = new List<Home>();
+        foreach (Place place in _places)
+        {
+            if (place.placeType == Place.PlaceType.Home)
+            {
+                Home home = (Home)place;
+                if (home.characters.Count < home.maxCharacters)
+                {
+                    homes.Add(home);
+                }
+            }
+        }
+        if (homes.Count > 0)
+        {
+            Home home = homes[Random.Range(0, homes.Count)];
+            home.AddCharacter(character);
+            return home;
+        }
+        return null;
     }
 
     public Home AddCharacterToHome(Character character)
