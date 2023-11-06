@@ -22,6 +22,8 @@ public class Character : MonoBehaviour
     private ITask _currentTask = null;
     private NavMeshAgent _navMeshAgent;
     private Rigidbody _rigidbody;
+    private MeshRenderer _meshRenderer;
+    private CapsuleCollider _capsuleCollider;
     private float _initialMass;
     private float _initialDrag;
     private float _minMass = 0.1f;
@@ -32,6 +34,16 @@ public class Character : MonoBehaviour
         {
             _currentTask.IsDone = true;
         }
+    }
+
+    public MeshRenderer GetMeshRenderer()
+    {
+        return _meshRenderer;
+    }
+
+    public CapsuleCollider GetCapsuleCollider()
+    {
+        return _capsuleCollider;
     }
 
     public NavMeshAgent GetNavMeshAgent()
@@ -61,6 +73,8 @@ public class Character : MonoBehaviour
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _rigidbody = GetComponent<Rigidbody>();
+        _meshRenderer = GetComponent<MeshRenderer>();
+        _capsuleCollider = GetComponent<CapsuleCollider>();
         _initialMass = _rigidbody.mass;
         _initialDrag = _rigidbody.drag;
 

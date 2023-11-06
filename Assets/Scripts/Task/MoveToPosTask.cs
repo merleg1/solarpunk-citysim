@@ -23,7 +23,7 @@ public  class MoveToPosTask : ITask
     public void ExecuteStart()
     {
         IsDone = false;
-        _navMeshAgent.SetDestination(_targetPos);
+        _navMeshAgent.SetDestination(new Vector3(_targetPos.x, 0, _targetPos.z));
     }
 
     public void ExecuteUpdate()

@@ -11,12 +11,16 @@ public class WaitAtCurrentDestinationTask : ITask
     public bool IsDone { get; set; }
 
     private NavMeshAgent _navMeshAgent;
+    private MeshRenderer _meshRenderer;
+    private CapsuleCollider _capsuleCollider;
     private float _waitTime;
     private float _startTime;
 
     public WaitAtCurrentDestinationTask(Character character, float waitTime, TaskPriority taskPriority = TaskPriority.Medium)
     {
         _navMeshAgent = character.GetNavMeshAgent();
+        _meshRenderer = character.GetMeshRenderer();
+        _capsuleCollider = character.GetCapsuleCollider();
         _waitTime = waitTime;
         Priority = taskPriority;
     }
@@ -24,7 +28,9 @@ public class WaitAtCurrentDestinationTask : ITask
     public void ExecuteStart()
     {
         IsDone = false;
-        _navMeshAgent.SetDestination(_navMeshAgent.transform.position);
+        _meshRenderer.enabled = false;
+        _capsuleCollider.enabled = false;
+        _navMeshAgent.enabled = false;
         _startTime = TimeManager.Instance.GetTimeSinceStartInHours();
     }
 
@@ -32,7 +38,9 @@ public class WaitAtCurrentDestinationTask : ITask
     {
         if (TimeManager.Instance.GetTimeSinceStartInHours() - _startTime >= _waitTime)
         {
-            _navMeshAgent.ResetPath();
+            _meshRenderer.enabled = true;
+            _capsuleCollider.enabled = true;
+            _navMeshAgent.enabled = true;
             IsDone = true;
         }
     }
