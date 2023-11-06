@@ -89,7 +89,7 @@ public class TaskManager : MonoBehaviour
         List<ITask> newTasks = new List<ITask>();
 
 
-        if (currentTime >= character.sleepTime - character.sleepTimeTolerance && currentTime < character.sleepTime + character.sleepTimeTolerance)
+        if (currentTime >= character.sleepTime)
         {
             newTasks.Add(new GoHomeTask(character));
             newTasks.Add(new WaitAtCurrentDestinationTask(character, Random.Range(character.minSleepDuration, character.maxSleepDuration)));
@@ -99,17 +99,25 @@ public class TaskManager : MonoBehaviour
             newTasks.Add(new GoEatTask(character));
             newTasks.Add(new WaitAtCurrentDestinationTask(character, character.eatDuration));
         }
-        else if (!character.wentToHobbyToday && character.wentToWorkToday)
+        else if (character.hobbyDuration > 0f && !character.wentToHobbyToday && character.wentToWorkToday && (currentTime + character.hobbyDuration <= 13f || (currentTime >= 14f && currentTime + character.hobbyDuration <= character.sleepTime + 0.5f)))
         {
             newTasks.Add(new GoToHobbyTask(character));
             newTasks.Add(new WaitAtCurrentDestinationTask(character, character.hobbyDuration));
             character.wentToHobbyToday = true;
         }
-        else if (character.remainingWorkHoursToday > 0)
+        else if (character.minWorkDuration > 0f && character.remainingWorkHoursToday > 0 && (currentTime + character.remainingWorkHoursToday/2 <= 13f || (currentTime >= 14f && currentTime + character.remainingWorkHoursToday/2 <= character.sleepTime + 0.5f)))
         {
             newTasks.Add(new GoToWorkTask(character));
-            newTasks.Add(new WaitAtCurrentDestinationTask(character, character.remainingWorkHoursToday / 2));
-            character.remainingWorkHoursToday -= character.remainingWorkHoursToday / 2;
+            if(character.remainingWorkHoursToday > character.maxWorkDuration/2)
+            {
+                newTasks.Add(new WaitAtCurrentDestinationTask(character, character.remainingWorkHoursToday / 2));
+                character.remainingWorkHoursToday -= character.remainingWorkHoursToday / 2;
+            }
+            else
+            {
+                newTasks.Add(new WaitAtCurrentDestinationTask(character, character.remainingWorkHoursToday));
+                character.remainingWorkHoursToday = 0f;
+            }
             character.wentToWorkToday = true;
         }
         else

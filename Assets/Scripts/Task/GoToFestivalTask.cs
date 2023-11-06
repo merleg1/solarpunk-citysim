@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GoToFestivalTask : MoveToPosTask
 {
-    public GoToFestivalTask(Character character, TaskPriority taskPriority = TaskPriority.High) : base(GetClosestFestivalPosition(character), character.GetNavMeshAgent(), 0f, taskPriority)
+    public GoToFestivalTask(Character character, TaskPriority taskPriority = TaskPriority.High) : base(GetClosestFestivalPosition(character), character.GetNavMeshAgent(), 10f, taskPriority)
     {
     }
 

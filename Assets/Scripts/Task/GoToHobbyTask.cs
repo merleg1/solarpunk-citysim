@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GoToHobbyTask : MoveToPosTask
 {
-    public GoToHobbyTask(Character character, TaskPriority taskPriority = TaskPriority.Medium) : base(GetClosestHobbyPlacePosition(character), character.GetNavMeshAgent(), 0f, taskPriority)
+    public GoToHobbyTask(Character character, TaskPriority taskPriority = TaskPriority.Medium) : base(GetClosestHobbyPlacePosition(character), character.GetNavMeshAgent(), 10f, taskPriority)
     {
     }
 

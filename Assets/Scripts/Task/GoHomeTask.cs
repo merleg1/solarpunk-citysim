@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GoHomeTask : MoveToPosTask
 {
-    public GoHomeTask(Character character, TaskPriority taskPriority = TaskPriority.Medium) : base(GetHomePosition(character), character.GetNavMeshAgent(), 0f, taskPriority)
+    public GoHomeTask(Character character, TaskPriority taskPriority = TaskPriority.Medium) : base(GetHomePosition(character), character.GetNavMeshAgent(), 10f, taskPriority)
     {
     }
 

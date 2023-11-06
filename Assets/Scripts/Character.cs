@@ -6,7 +6,6 @@ public class Character : MonoBehaviour
     public float minWorkDuration;
     public float maxWorkDuration;
     public float sleepTime;
-    public float sleepTimeTolerance;
     public float minSleepDuration;
     public float maxSleepDuration;
     public float hobbyDuration;

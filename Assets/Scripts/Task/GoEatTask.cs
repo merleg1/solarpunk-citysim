@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GoEatTask : MoveToPosTask
 {
-    public GoEatTask(Character character, TaskPriority taskPriority = TaskPriority.Medium) : base(GetClosestEatPlacePosition(character), character.GetNavMeshAgent(), 0f, taskPriority)
+    public GoEatTask(Character character, TaskPriority taskPriority = TaskPriority.Medium) : base(GetClosestEatPlacePosition(character), character.GetNavMeshAgent(), 10f, taskPriority)
     {
     }
 
